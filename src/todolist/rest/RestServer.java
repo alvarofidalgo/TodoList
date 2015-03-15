@@ -21,8 +21,7 @@ public final class RestServer {
 	}
 	
 	public void addServiceInContext(String context,HttpHandler restService){
-		server.createContext("/"+context, restService);		
-		
+		server.createContext("/"+context, restService);				
 	}
 	
 	public void start() {
