@@ -7,7 +7,7 @@ import todolist.entitys.Task;
 public final class TaskInserter {
 	
 	public void insertTaskInListIfSameStatus(List<Task> taskList,Task task,String status){
-		if (task.getStatus().equals(status))
+		if (task.getStatus().equals(Task.Status.valueOf(status.toUpperCase())))
 			taskList.add(task);
 	}
 	

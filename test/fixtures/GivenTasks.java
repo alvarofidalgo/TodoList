@@ -1,7 +1,7 @@
 package fixtures;
 
-import doubles.MemoryDb;
 import todolist.entitys.Task;
+import todolist.gateways.doubles.MemoryDb;
 
 public final class GivenTasks {
 		

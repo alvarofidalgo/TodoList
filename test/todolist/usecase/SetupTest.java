@@ -2,11 +2,11 @@ package todolist.usecase;
 
 import todolist.entitys.Task;
 import todolist.gateways.Context;
+import todolist.gateways.doubles.InMemoryPresentFirstTerminatedTasks;
+import todolist.gateways.doubles.InMemoryPresentTasks;
+import todolist.gateways.doubles.InMemoryTaskOperations;
+import todolist.gateways.doubles.MemoryDb;
 import todolist.usecase.selector.PresentTaskGatewaySelector;
-import doubles.InMemoryPresentFirstTerminatedTasks;
-import doubles.InMemoryPresentTasks;
-import doubles.InMemoryTaskOperations;
-import doubles.MemoryDb;
 import fixtures.GivenTasks;
 import fixtures.QueryTasks;
 

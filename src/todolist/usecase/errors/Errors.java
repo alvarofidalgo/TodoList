@@ -1,21 +1,22 @@
 package todolist.usecase.errors;
 
-import java.util.HashMap;
-import java.util.Map;
+import todolist.entitys.Task;
+import todolist.usecase.checkers.Checker;
+import todolist.usecase.checkers.CheckersLauncher;
 
 public final class Errors {
-		
-	public enum TypeErrors {TASK_WITH_SAME_DESCRIPTION,MODIFY_TASK_TERMINATED,DELETE_PENDING_TASK};
 	
-	private Map<TypeErrors,String> errors = new HashMap<TypeErrors,String>();
+	private String _errorMessage;
+	private CheckersLauncher _checksErrors = new CheckersLauncher();
 	
-	public Errors(){
-		errors.put(TypeErrors.TASK_WITH_SAME_DESCRIPTION, "Error : there is one task with same description");
-		errors.put(TypeErrors.MODIFY_TASK_TERMINATED, "Error : Tasks in terminated state can´t modify");
-		errors.put(TypeErrors.DELETE_PENDING_TASK, "Error:You can´t delete pending task");
+	public Errors(String errorMessage,Checker... checkers){
+		_errorMessage = errorMessage;
+		_checksErrors.addCheckers(checkers);
 	}
-	
-	public String showExistErrorTo(TypeErrors typeError,boolean existError){
-		return existError?errors.get(typeError):"";		
+
+	public String errorInTaskIs(Task task) {
+		if (_checksErrors.taskPassAllChecks(task))
+			_errorMessage = "";
+		return _errorMessage;
 	}
 }

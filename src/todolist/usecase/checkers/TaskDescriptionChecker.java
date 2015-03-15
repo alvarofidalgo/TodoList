@@ -4,16 +4,13 @@ import todolist.entitys.Task;
 
 public final class TaskDescriptionChecker implements Checker{
 	
-	private boolean _mandatoryEmpty;
+	private String _description ;
 	
-	public TaskDescriptionChecker(boolean mandatoryEmpty){
-		_mandatoryEmpty = mandatoryEmpty;
+	public TaskDescriptionChecker(String description){
+		_description = description;
 	}
 	
 	public boolean isValid(Task task) {
-		boolean valid = !task.getTaskDescription().isEmpty();
-		if (_mandatoryEmpty)
-			valid =  task.getTaskDescription().isEmpty();
-		return valid;
+		return _description.equals(task.getTaskDescription());
 	}
 }

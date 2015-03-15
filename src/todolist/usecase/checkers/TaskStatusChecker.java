@@ -13,5 +13,4 @@ public final class TaskStatusChecker implements Checker {
 	public boolean isValid(Task task){
 		return _status.equals(task.getStatus());
 	}
-
 }

@@ -3,9 +3,8 @@ package fixtures;
 import java.util.ArrayList;
 import java.util.List;
 
-import doubles.MemoryDb;
 import todolist.entitys.Task;
-import todto.TaskDto;
+import todolist.gateways.doubles.MemoryDb;
 import utils.TaskInserter;
 
 public final class QueryTasks {
@@ -15,12 +14,12 @@ public final class QueryTasks {
 	public QueryTasks(MemoryDb db){
 		_db = db;
 	}
-	public List<Object> query(){
-		return new TaskDto().toDto(_db.getTasks());
+	public List<Task> query(){
+		return _db.getTasks();
 	}
 	
 	
-	public List<Object> queryWithTerminatedTaskFirst() {
+	public List<Task> queryWithTerminatedTaskFirst() {
 		TaskInserter taskInerter = new TaskInserter();
 		List<Task> tasks = _db.getTasks();
 		List<Task> terminatedTask = new ArrayList<Task>();
@@ -31,6 +30,6 @@ public final class QueryTasks {
 			taskInerter.insertTaskInListIfSameStatus(pendingTasks,task,"pending");	
 		}
 
-		return new TaskDto().toDto(taskInerter.appendListInOrder(terminatedTask, pendingTasks));
+		return taskInerter.appendListInOrder(terminatedTask, pendingTasks);
 	}
 }
