@@ -1,9 +1,10 @@
 package todolist.rest.service;
 
 import todolist.rest.model.Response;
+import todolist.rest.model.TaskRequest;
 
 public interface Service {
 
-	Response execute(String[] valueParameters);
+	Response execute(TaskRequest taskRequest);
 
 }

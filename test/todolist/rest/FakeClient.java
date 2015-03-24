@@ -10,6 +10,7 @@ public final class FakeClient {
 	
     private int _port;
     private String _collection="NO_COLLECTION";
+    private HttpURLConnection _connection;
     
 	public FakeClient(int port){
 		_port = port;
@@ -22,10 +23,20 @@ public final class FakeClient {
 	
 	public HttpURLConnection createConnectionWithMethodAndService(String method,String service) throws MalformedURLException, IOException{
 		
-		HttpURLConnection	connection =  (HttpURLConnection) new URL("http://localhost:"+_port+"/"+_collection+service).openConnection();		  
-		connection.setRequestMethod(method);
-		connection.addRequestProperty("Access-control-request-method", method);		
-		connection.connect();	
-		return connection;
+		_connection =  (HttpURLConnection) new URL("http://localhost:"+_port+"/"+_collection+service).openConnection();		  
+		_connection.setRequestMethod(method);
+		_connection.addRequestProperty("Access-control-request-method", method);		
+		_connection.connect();	
+		return _connection;
+	}
+	
+	public int responseCodeIs(){
+		try {
+			return _connection.getResponseCode();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return -1;
 	}
 }

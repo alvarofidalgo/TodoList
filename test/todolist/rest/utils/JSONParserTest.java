@@ -10,6 +10,8 @@ import org.junit.Test;
 
 import todolist.entitys.Task;
 
+//TODO : THIS CLASS WILL BE REMOVED
+
 public class JSONParserTest {
 	
 	private List<Task> tasks;

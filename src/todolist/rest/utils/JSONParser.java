@@ -11,7 +11,7 @@ public final class JSONParser {
 	}
 	
 	private StringBuffer includeExternalBraces(StringBuffer buffer){
-		return buffer.insert(0, "{").append("}");
+		return buffer.insert(0, "[ ").append(" ]");
 	}
 	
 	private StringBuffer deleteLastCommaIfExist(StringBuffer buffer){

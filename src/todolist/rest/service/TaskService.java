@@ -1,44 +1,71 @@
 package todolist.rest.service;
 
 import java.io.IOException;
-import java.io.OutputStream;
-import java.util.HashMap;
-import java.util.Map;
+import java.net.HttpURLConnection;
+
+import javax.servlet.http.HttpServletResponse;
+
+import org.codehaus.jackson.JsonGenerationException;
+import org.codehaus.jackson.map.JsonMappingException;
+import org.codehaus.jackson.map.ObjectMapper;
+import org.codehaus.jackson.map.ObjectWriter;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.web.bind.annotation.RestController;
+
+
 
 import todolist.rest.model.Response;
-import todolist.rest.service.headers.HttpResponseHeadersFactory.TypeHttpCalculator;
-import todolist.rest.utils.RequestExtractor;
+import todolist.rest.model.TaskRequest;
+import todolist.rest.service.headers.HttpResponserHeaderCalculator;
 import todolist.usecase.ModifyTodoListUseCaseFactory.TypeModifyTodoList;
 import todolist.usecase.errors.ModifyTodoListErrorFactory.TypeErrorModifyTodoList;
 
-import com.sun.net.httpserver.HttpExchange;
-import com.sun.net.httpserver.HttpHandler;
 
-
-public final class TaskService implements HttpHandler {
-		
-	private Map<String,Service> _services = new HashMap<String,Service>();
+@RestController(value="/task")
+public final class TaskService {
 	
-	public TaskService(){
-		_services.put("GET", new ListTasks());
-		_services.put("PUT", new TodoListModifierService(TypeModifyTodoList.INSERT_TASK,TypeErrorModifyTodoList.INSERT_TASK,TypeHttpCalculator.INSERT_TASK));
-		_services.put("POST", new TodoListModifierService(TypeModifyTodoList.MODIFY_TASK,TypeErrorModifyTodoList.MODIFY_TASK,TypeHttpCalculator.MODIFY_OR_DELETE_TASK));		
-		_services.put("DELETE", new TodoListModifierService(TypeModifyTodoList.DELETE_TASK,TypeErrorModifyTodoList.DELETE_TASK,TypeHttpCalculator.MODIFY_OR_DELETE_TASK));
-		
+	@Autowired private  HttpServletResponse responseInScopeFilter;
+	private TaskRequest _request;
+	
+	@ModelAttribute("TaskRequest")
+	public void fillTaskRequest(TaskRequest request){
+		_request= request; 
 	}
-  		
-	public void handle(HttpExchange httpExchange) throws IOException {
-		RequestExtractor requestExtractor = new RequestExtractor(httpExchange);	
-	    Response response = _services.get(requestExtractor.httpMethod()).execute(requestExtractor.obtainParametersValues());
-	    writeResponse(httpExchange,response);
+		
+	@RequestMapping(method=RequestMethod.GET)	
+	@ResponseStatus (value = HttpStatus.OK)	
+	public String getTaskListWithorder() throws JsonGenerationException, JsonMappingException, IOException {		
+		ObjectWriter ow = new ObjectMapper().writer().withDefaultPrettyPrinter();
+		Response responseBody = new ListTasks().execute(_request);
+		return ow.writeValueAsString(responseBody);	
+	}
+		
+	@RequestMapping(method=RequestMethod.PUT)	
+	public String inserTask() throws JsonGenerationException, JsonMappingException, IOException{		
+		ObjectWriter ow = new ObjectMapper().writer().withDefaultPrettyPrinter();
+		Response responseBody = new TodoListModifierService(TypeModifyTodoList.INSERT_TASK,TypeErrorModifyTodoList.INSERT_TASK).execute(_request);
+		responseInScopeFilter.setStatus(new HttpResponserHeaderCalculator(HttpURLConnection.HTTP_CREATED,HttpURLConnection.HTTP_NOT_MODIFIED).calculateResponseHeader(responseBody));
+		return ow.writeValueAsString(responseBody);
 	}
 	
-	private void writeResponse(HttpExchange httpExchange,Response response) throws IOException{
-		String jsonResponse = response.toJson();
-        httpExchange.getResponseHeaders().add("Access-Control-Allow-Origin","null");       
-        OutputStream os = httpExchange.getResponseBody();      
-        httpExchange.sendResponseHeaders(response.getHttpResponseHeader(), jsonResponse.length());    
-        os.write(jsonResponse.getBytes());
-        os.close();		
+	@RequestMapping(method=RequestMethod.POST)
+	public String modifyTask() throws JsonGenerationException, JsonMappingException, IOException{
+		ObjectWriter ow = new ObjectMapper().writer().withDefaultPrettyPrinter();
+		Response responseBody = new TodoListModifierService(TypeModifyTodoList.MODIFY_TASK,TypeErrorModifyTodoList.MODIFY_TASK).execute(_request);
+		responseInScopeFilter.setStatus(new HttpResponserHeaderCalculator(HttpURLConnection.HTTP_OK,HttpURLConnection.HTTP_NOT_MODIFIED).calculateResponseHeader(responseBody));
+	    return ow.writeValueAsString(responseBody);
+	}
+	
+	@RequestMapping(method=RequestMethod.DELETE)
+	public String deleteTask() throws JsonGenerationException, JsonMappingException, IOException{
+		ObjectWriter ow = new ObjectMapper().writer().withDefaultPrettyPrinter();
+		Response responseBody = new TodoListModifierService(TypeModifyTodoList.DELETE_TASK,TypeErrorModifyTodoList.DELETE_TASK).execute(_request);
+		responseInScopeFilter.setStatus(new HttpResponserHeaderCalculator(HttpURLConnection.HTTP_OK,HttpURLConnection.HTTP_NOT_MODIFIED).calculateResponseHeader(responseBody));
+		return ow.writeValueAsString(responseBody);	
 	}
 }
