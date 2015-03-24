@@ -33,7 +33,7 @@ public final class TaskService {
 	private TaskRequest _request;
 	
 	@ModelAttribute("TaskRequest")
-	public void fillTaskRequest(TaskRequest request){
+	public void decodeQueryHeader(TaskRequest request){
 		_request= request; 
 	}
 		
