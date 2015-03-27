@@ -2,9 +2,7 @@ package todolist.rest.model;
 
 import java.util.ArrayList;
 import java.util.List;
-
 import todolist.entitys.Task;
-import todolist.rest.utils.JSONParser;
 
 public final class Response {
 	
@@ -25,10 +23,5 @@ public final class Response {
 	
 	public void setTasks(List<Task> tasks) {
 		_tasks = tasks;
-	}
-	
-	public String toJson(){
-		return "{\"tasks\":"+new JSONParser().toStringJSON(_tasks)+","+
-	           "\"error\":\""+_error+"\"";				
 	}
 }
