@@ -3,26 +3,32 @@
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="src" path="test"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/4"/>
-	<classpathentry kind="lib" path="/Users/alvarofidalgo/java/TodoList/lib/commons-logging-4.0.6.jar"/>
-	<classpathentry kind="lib" path="/Users/alvarofidalgo/java/TodoList/lib/cpsuite-1.2.5.jar"/>
-	<classpathentry kind="lib" path="/Users/alvarofidalgo/java/TodoList/lib/jackson-core-asl-1.9.13.jar"/>
-	<classpathentry kind="lib" path="/Users/alvarofidalgo/java/TodoList/lib/jackson-mapper-asl-1.9.13.jar"/>
-	<classpathentry kind="lib" path="/Users/alvarofidalgo/java/TodoList/lib/java-json.jar"/>
-	<classpathentry kind="lib" path="/Users/alvarofidalgo/java/TodoList/lib/mockito-all-1.9.5.jar"/>
-	<classpathentry kind="lib" path="/Users/alvarofidalgo/java/TodoList/lib/spring-aop-4.1.5.RELEASE.jar"/>
-	<classpathentry kind="lib" path="/Users/alvarofidalgo/java/TodoList/lib/spring-beans-4.1.5.RELEASE.jar"/>
-	<classpathentry kind="lib" path="/Users/alvarofidalgo/java/TodoList/lib/spring-boot-1.2.2.RELEASE.jar"/>
-	<classpathentry kind="lib" path="/Users/alvarofidalgo/java/TodoList/lib/spring-boot-autoconfigure-1.2.2.RELEASE.jar"/>
-	<classpathentry kind="lib" path="/Users/alvarofidalgo/java/TodoList/lib/spring-boot-starter-1.2.2.RELEASE.jar"/>
-	<classpathentry kind="lib" path="/Users/alvarofidalgo/java/TodoList/lib/spring-boot-starter-web-1.2.2.RELEASE.jar"/>
-	<classpathentry kind="lib" path="/Users/alvarofidalgo/java/TodoList/lib/spring-context-4.1.5.RELEASE.jar"/>
-	<classpathentry kind="lib" path="/Users/alvarofidalgo/java/TodoList/lib/spring-context-support-4.1.5.RELEASE.jar"/>
-	<classpathentry kind="lib" path="/Users/alvarofidalgo/java/TodoList/lib/spring-core-4.1.5.RELEASE.jar"/>
-	<classpathentry kind="lib" path="/Users/alvarofidalgo/java/TodoList/lib/spring-expression-4.1.5.RELEASE.jar"/>
-	<classpathentry kind="lib" path="/Users/alvarofidalgo/java/TodoList/lib/spring-web-4.1.5.RELEASE.jar"/>
-	<classpathentry kind="lib" path="/Users/alvarofidalgo/java/TodoList/lib/spring-webmvc-4.1.5.RELEASE.jar"/>
-	<classpathentry kind="lib" path="/Users/alvarofidalgo/java/TodoList/lib/tomcat-embed-core-8.0.20.jar"/>
-	<classpathentry kind="lib" path="/Users/alvarofidalgo/java/TodoList/lib/tomcat-embed-logging-juli-8.0.20.jar"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/Java("/>
+	<classpathentry kind="lib" path="/Users/alvarofidalgo/java/TodoList/lib/application/aopalliance-1.0.jar"/>
+	<classpathentry kind="lib" path="/Users/alvarofidalgo/java/TodoList/lib/application/aspectjrt-1.7.4.jar"/>
+	<classpathentry kind="lib" path="/Users/alvarofidalgo/java/TodoList/lib/application/aspectjrt-1.8.5.jar"/>
+	<classpathentry kind="lib" path="/Users/alvarofidalgo/java/TodoList/lib/application/aspectjtools-1.7.4.jar"/>
+	<classpathentry kind="lib" path="/Users/alvarofidalgo/java/TodoList/lib/application/aspectjweaver-1.7.4.jar"/>
+	<classpathentry kind="lib" path="/Users/alvarofidalgo/java/TodoList/lib/application/aspectjweaver-1.8.5.jar"/>
+	<classpathentry kind="lib" path="/Users/alvarofidalgo/java/TodoList/lib/application/commons-logging-4.0.6.jar"/>
+	<classpathentry kind="lib" path="/Users/alvarofidalgo/java/TodoList/lib/application/jackson-core-asl-1.9.13.jar"/>
+	<classpathentry kind="lib" path="/Users/alvarofidalgo/java/TodoList/lib/application/jackson-mapper-asl-1.9.13.jar"/>
+	<classpathentry kind="lib" path="/Users/alvarofidalgo/java/TodoList/lib/application/spring-aop-4.1.5.RELEASE.jar"/>
+	<classpathentry kind="lib" path="/Users/alvarofidalgo/java/TodoList/lib/application/spring-beans-4.1.5.RELEASE.jar"/>
+	<classpathentry kind="lib" path="/Users/alvarofidalgo/java/TodoList/lib/application/spring-boot-1.2.2.RELEASE.jar"/>
+	<classpathentry kind="lib" path="/Users/alvarofidalgo/java/TodoList/lib/application/spring-boot-autoconfigure-1.2.2.RELEASE.jar"/>
+	<classpathentry kind="lib" path="/Users/alvarofidalgo/java/TodoList/lib/application/spring-boot-starter-1.2.2.RELEASE.jar"/>
+	<classpathentry kind="lib" path="/Users/alvarofidalgo/java/TodoList/lib/application/spring-boot-starter-aop-1.2.2.RELEASE.jar"/>
+	<classpathentry kind="lib" path="/Users/alvarofidalgo/java/TodoList/lib/application/spring-boot-starter-web-1.2.2.RELEASE.jar"/>
+	<classpathentry kind="lib" path="/Users/alvarofidalgo/java/TodoList/lib/application/spring-context-4.1.5.RELEASE.jar"/>
+	<classpathentry kind="lib" path="/Users/alvarofidalgo/java/TodoList/lib/application/spring-context-support-4.1.5.RELEASE.jar"/>
+	<classpathentry kind="lib" path="/Users/alvarofidalgo/java/TodoList/lib/application/spring-core-4.1.5.RELEASE.jar"/>
+	<classpathentry kind="lib" path="/Users/alvarofidalgo/java/TodoList/lib/application/spring-expression-4.1.5.RELEASE.jar"/>
+	<classpathentry kind="lib" path="/Users/alvarofidalgo/java/TodoList/lib/application/spring-web-4.1.5.RELEASE.jar"/>
+	<classpathentry kind="lib" path="/Users/alvarofidalgo/java/TodoList/lib/application/spring-webmvc-4.1.5.RELEASE.jar"/>
+	<classpathentry kind="lib" path="/Users/alvarofidalgo/java/TodoList/lib/application/tomcat-embed-core-8.0.20.jar"/>
+	<classpathentry kind="lib" path="/Users/alvarofidalgo/java/TodoList/lib/application/tomcat-embed-logging-juli-8.0.20.jar"/>
+	<classpathentry kind="lib" path="/Users/alvarofidalgo/java/TodoList/lib/test/cpsuite-1.2.5.jar"/>
+	<classpathentry kind="lib" path="/Users/alvarofidalgo/java/TodoList/lib/test/mockito-all-1.9.5.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

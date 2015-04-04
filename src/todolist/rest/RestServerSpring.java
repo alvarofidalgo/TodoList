@@ -10,7 +10,9 @@ public class RestServerSpring {
 	private ConfigurableApplicationContext context;
 
     public  void start(String [] args) {
-    	context = SpringApplication.run(RestServerSpring.class,args );
+
+    	SpringApplication aplication = new SpringApplication(RestServerSpring.class);  
+    	context = aplication.run(args);    	
     }
     
     public void stop(){
