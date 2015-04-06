@@ -3,6 +3,7 @@ package todolist.rest.controller;
 import static org.junit.Assert.assertEquals;
 
 import java.io.BufferedReader;
+import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -53,14 +54,15 @@ public class TaskServiceTest {
 	
 	@Test public void whenCallGetMethod() throws IOException{
 		response.setTasks(setup.getQueryTasks().query());
-		assertEquals(transformInputToString(client.createConnectionWithMethodAndService("GET","?order=no_order").getInputStream()),ow.writeValueAsString(response));
+		assertEquals(transformInputToString(client.createConnectionWithMethodAndService("GET","?order=no_order").getInputStream()),
+				     deleteCarriageReturns(ow.writeValueAsString(response)));
 		assertEquals(client.responseCodeIs(),HttpURLConnection.HTTP_OK);		
 	}
 	
 	@Test public void whenCallPutMethod() throws MalformedURLException, IOException{
 		response.setTasks(setup.getQueryTasks().query());
 		assertEquals(transformInputToString(client.createConnectionWithMethodAndService("PUT","?order=no_order&taskdescription=task5&status=pending").getInputStream()),
-				                             ow.writeValueAsString(response));
+				     deleteCarriageReturns(ow.writeValueAsString(response)));
 		assertEquals(setup.getQueryTasks().query().get(4).getStatus(),Task.Status.PENDING);
 		assertEquals(client.responseCodeIs(),HttpURLConnection.HTTP_CREATED);
 	}
@@ -74,7 +76,7 @@ public class TaskServiceTest {
 	@Test public void whenCallPostMethod() throws MalformedURLException, IOException{
 		response.setTasks(setup.getQueryTasks().query());
 		assertEquals(transformInputToString(client.createConnectionWithMethodAndService("POST","?order=no_order&taskdescription=task1&status=terminated").getInputStream()),
-				ow.writeValueAsString(response));
+				deleteCarriageReturns(ow.writeValueAsString(response)));
 		assertEquals(setup.getQueryTasks().query().get(0).getStatus(),Task.Status.TERMINATED);
 		assertEquals(client.responseCodeIs(),HttpURLConnection.HTTP_OK);
 	}
@@ -90,7 +92,7 @@ public class TaskServiceTest {
 		int length = setup.getQueryTasks().query().size();
 		response.setTasks(setup.getQueryTasks().query());
 		assertEquals(transformInputToString(client.createConnectionWithMethodAndService("DELETE","?order=no_order&taskdescription=task2&status=terminated").getInputStream()),
-				       ow.writeValueAsString(response));
+				deleteCarriageReturns( ow.writeValueAsString(response)));
 		assertEquals(length-1,setup.getQueryTasks().query().size());
 		assertEquals(client.responseCodeIs(),HttpURLConnection.HTTP_OK);
 	}
@@ -100,6 +102,16 @@ public class TaskServiceTest {
 		assertEquals(client.responseCodeIs(),HttpURLConnection.HTTP_NOT_MODIFIED);
 	}
 	
+	private String deleteCarriageReturns(String jsonObject) throws IOException{
+		
+		StringBuilder sb = new StringBuilder();
+		String line ;
+		BufferedReader br =  new BufferedReader(new InputStreamReader(new ByteArrayInputStream( jsonObject.getBytes() )));
+		while ((line = br.readLine()) != null) 
+			sb.append(line.replaceAll("\\s+",""));
+		return sb.toString();
+	}
+	
 	
 	private String transformInputToString(InputStream stream) throws IOException{
 		
@@ -107,7 +119,7 @@ public class TaskServiceTest {
 		String line ;
 	    BufferedReader br = new BufferedReader(new InputStreamReader(stream));
 		while ((line = br.readLine()) != null) 
-				sb.append(line).append("\n");
-		return sb.delete(sb.length()-1, sb.length()).toString();
+				sb.append(line);
+		return  sb.toString();
 	}
 }
